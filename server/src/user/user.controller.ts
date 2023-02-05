@@ -28,6 +28,11 @@ export class UserController {
     return this.userService.updateUser(id);
   }
 
+  @Put('password')
+  updatePassword() {
+    return this.userService.updatePassword();
+  }
+
   @Delete()
   deleteUser(@Param('id', ParseIntPipe) id: number) {
     return this.userService.deleteUser(id);

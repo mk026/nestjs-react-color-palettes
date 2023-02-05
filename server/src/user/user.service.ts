@@ -18,6 +18,10 @@ export class UserService {
     return `Update user with id ${id}`;
   }
 
+  updatePassword() {
+    return `Update password`;
+  }
+
   deleteUser(id: number) {
     return `Delete user with id ${id}`;
   }
