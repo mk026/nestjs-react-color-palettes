@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -6,6 +7,9 @@ import {
   ParseIntPipe,
   Put,
 } from '@nestjs/common';
+
+import { UpdatePasswordDto } from './dto/update-password.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 import { UserService } from './user.service';
 
@@ -23,14 +27,14 @@ export class UserController {
     return this.userService.getUser(id);
   }
 
-  @Put(':id')
-  updateUser(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.updateUser(id);
+  @Put()
+  updateUser(@Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateUser(updateUserDto);
   }
 
   @Put('password')
-  updatePassword() {
-    return this.userService.updatePassword();
+  updatePassword(@Body() updatePasswordDto: UpdatePasswordDto) {
+    return this.userService.updatePassword(updatePasswordDto);
   }
 
   @Delete()
