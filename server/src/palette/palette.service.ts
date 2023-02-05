@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreatePaletteDto } from './dto/create-palette.dto';
+
 @Injectable()
 export class PaletteService {
   getPalettes() {
@@ -10,7 +12,7 @@ export class PaletteService {
     return `Return palette with id ${id}`;
   }
 
-  createPalette() {
+  createPalette(createPaletteDto: CreatePaletteDto) {
     return 'Create new palette';
   }
 

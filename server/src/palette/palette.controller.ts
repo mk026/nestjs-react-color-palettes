@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -7,6 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { CreatePaletteDto } from './dto/create-palette.dto';
 
 import { PaletteService } from './palette.service';
 
@@ -24,9 +26,9 @@ export class PaletteController {
     return this.paletteService.getPalette(id);
   }
 
-  @Post(':id')
-  createPalette(@Param('id', ParseIntPipe) id: number) {
-    return this.paletteService.getPalette(id);
+  @Post()
+  createPalette(@Body() createPaletteDto: CreatePaletteDto) {
+    return this.paletteService.createPalette(createPaletteDto);
   }
 
   @Put(':id')
