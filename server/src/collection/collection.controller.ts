@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -9,6 +10,8 @@ import {
 } from '@nestjs/common';
 
 import { CollectionService } from './collection.service';
+import { CreateCollectionDto } from './dto/create-collection.dto';
+import { UpdateCollectionDto } from './dto/update-collection.dto';
 
 @Controller('collections')
 export class CollectionController {
@@ -25,13 +28,16 @@ export class CollectionController {
   }
 
   @Post()
-  createCollection() {
-    return this.collectionService.createCollection();
+  createCollection(@Body() createCollectionDto: CreateCollectionDto) {
+    return this.collectionService.createCollection(createCollectionDto);
   }
 
   @Put(':id')
-  updateCollection(@Param('id', ParseIntPipe) id: number) {
-    return this.collectionService.updateCollection(id);
+  updateCollection(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCollectionDto: UpdateCollectionDto,
+  ) {
+    return this.collectionService.updateCollection(id, updateCollectionDto);
   }
 
   @Delete()

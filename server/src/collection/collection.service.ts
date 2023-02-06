@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateCollectionDto } from './dto/create-collection.dto';
+import { UpdateCollectionDto } from './dto/update-collection.dto';
+
 @Injectable()
 export class CollectionService {
   getCollections() {
@@ -10,11 +13,11 @@ export class CollectionService {
     return `Return collection with id ${id}`;
   }
 
-  createCollection() {
+  createCollection(createCollectionDto: CreateCollectionDto) {
     return 'Create new collection';
   }
 
-  updateCollection(id: number) {
+  updateCollection(id: number, updateCollectionDto: UpdateCollectionDto) {
     return `Update collection with id ${id}`;
   }
 
