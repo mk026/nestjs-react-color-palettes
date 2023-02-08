@@ -14,7 +14,7 @@ export class Collection {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @CreateDateColumn({ type: 'timestamp' })

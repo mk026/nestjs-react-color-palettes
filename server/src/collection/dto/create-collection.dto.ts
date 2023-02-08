@@ -1,4 +1,4 @@
-import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, MaxLength, MinLength } from 'class-validator';
 
 export class CreateCollectionDto {
   @IsNotEmpty()
@@ -6,8 +6,8 @@ export class CreateCollectionDto {
   @MaxLength(100)
   readonly title: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(1)
   @MaxLength(1000)
-  readonly description: string;
+  readonly description?: string;
 }
