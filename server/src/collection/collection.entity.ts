@@ -2,9 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { Palette } from '../palette/palette.entity';
+import { User } from '../user/user.entity';
 
 @Entity()
 export class Collection {
@@ -16,6 +22,13 @@ export class Collection {
 
   @Column({ nullable: true })
   description: string;
+
+  @ManyToOne(() => User, (user) => user.collections)
+  author: User;
+
+  @ManyToMany(() => Palette, (palette) => palette.collections)
+  @JoinTable()
+  palettes: Palette[];
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;

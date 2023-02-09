@@ -2,9 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { Collection } from '../collection/collection.entity';
+import { Palette } from '../palette/palette.entity';
 
 @Entity()
 export class User {
@@ -22,6 +26,12 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Collection, (collection) => collection.author)
+  collections: Collection[];
+
+  @OneToMany(() => Palette, (palette) => palette.author)
+  palettes: Palette[];
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
