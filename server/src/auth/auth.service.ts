@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { SigninCredentialsDto } from './dto/signin-credentials.dto';
 import { SignupCredentialsDto } from './dto/signup-credentials.dto';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
   }
 
   signToken(userId: number) {
-    const payload = { userId };
+    const payload: JwtPayload = { userId };
     return this.jwtService.sign(payload);
   }
 }
