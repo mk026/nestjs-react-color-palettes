@@ -1,17 +1,13 @@
 import { FC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider } from "react-hook-form";
 import { Box } from "@mui/material";
 
-import { signinValidationSchema } from "../../helpers/signinValidation";
 import FormField from "../../../../components/form-field";
 import LoadingButton from "../../../../components/loading-button";
+import { useSigninForm } from "../../hooks/useSigninForm";
 
 const SigninForm: FC = () => {
-  const methods = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(signinValidationSchema),
-  });
+  const methods = useSigninForm();
 
   const signinHandler = (values: any) => {
     console.log(values);
