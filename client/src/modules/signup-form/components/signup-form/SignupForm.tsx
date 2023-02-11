@@ -3,7 +3,7 @@ import { FormProvider } from "react-hook-form";
 import { Box } from "@mui/material";
 
 import FormField from "../../../../components/form-field";
-import LoadingButton from "../../../../components/loading-button";
+import SignupButton from "../signup-button";
 import { useSignupForm } from "../../hooks/useSignupForm";
 
 const SignupForm: FC = () => {
@@ -25,7 +25,7 @@ const SignupForm: FC = () => {
           name="confirmPassword"
           type="password"
         />
-        <LoadingButton isLoading={false}>Signup</LoadingButton>
+        <SignupButton isLoading={false} />
       </Box>
     </FormProvider>
   );
