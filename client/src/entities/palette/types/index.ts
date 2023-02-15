@@ -3,4 +3,6 @@ export interface IPalette {
   title: string;
   colors: string[];
   author: number;
+  createdAt: string;
+  updatedAt: string;
 }

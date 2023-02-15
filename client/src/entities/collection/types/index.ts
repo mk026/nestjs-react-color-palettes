@@ -3,4 +3,6 @@ export interface ICollection {
   title: string;
   description: string;
   author: number;
+  createdAt: string;
+  updatedAt: string;
 }
