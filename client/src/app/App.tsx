@@ -1,8 +1,12 @@
+import Header from "../widgets/header/ui/header/Header";
+import AppRouter from "./router";
+
 function App() {
   return (
-    <div>
-      <h1>Color Palettes</h1>
-    </div>
+    <>
+      <Header />
+      <AppRouter />
+    </>
   );
 }
 
