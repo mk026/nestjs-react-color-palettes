@@ -1,1 +1,1 @@
-export { default } from "./components/create-palette-form";
+export { default } from "./ui/create-palette-form";

@@ -1,1 +1,1 @@
-export { default } from "./components/palettes-page";
+export { default } from "./ui/palettes-page";

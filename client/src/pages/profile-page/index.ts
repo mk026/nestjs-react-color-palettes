@@ -1,1 +1,1 @@
-export { default } from "./components/profile-page";
+export { default } from "./ui/profile-page";

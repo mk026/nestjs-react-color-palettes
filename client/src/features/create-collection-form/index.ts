@@ -1,1 +1,1 @@
-export { default } from "./components/create-collection-form";
+export { default } from "./ui/create-collection-form";

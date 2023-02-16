@@ -1,1 +1,1 @@
-export { default } from "./components/signup-form";
+export { default } from "./ui/signup-form";
