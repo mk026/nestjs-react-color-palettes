@@ -1,7 +1,18 @@
 import { FC } from "react";
+import { Card, Typography } from "@mui/material";
 
-const Comment: FC = () => {
-  return <div>Comment</div>;
+import { IComment } from "../../types";
+
+interface CommentProps {
+  comment: IComment;
+}
+
+const Comment: FC<CommentProps> = ({ comment }) => {
+  return (
+    <Card>
+      <Typography variant="body1">{comment.content}</Typography>
+    </Card>
+  );
 };
 
 export default Comment;
