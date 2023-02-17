@@ -1,5 +1,5 @@
 import { api } from "../../../app/api/axiosInstance";
-import { CREATE_PALETTE_ENDPOINT_URL } from "../config";
+import { PALETTES_ENDPOINT_URL } from "../../../entities/palette";
 
 export const createPaletteRequest = (data: any) =>
-  api.post(CREATE_PALETTE_ENDPOINT_URL, data);
+  api.post(PALETTES_ENDPOINT_URL, data);

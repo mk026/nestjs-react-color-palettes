@@ -1,5 +1,5 @@
 import { api } from "../../../app/api/axiosInstance";
-import { CREATE_COLLECTION_ENDPOINT_URL } from "../config";
+import { COLLECTIONS_ENDPOINT_URL } from "../../../entities/collection";
 
 export const createCollectionRequest = (data: any) =>
-  api.post(CREATE_COLLECTION_ENDPOINT_URL, data);
+  api.post(COLLECTIONS_ENDPOINT_URL, data);
