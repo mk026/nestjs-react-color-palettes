@@ -7,8 +7,10 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CollectionService } from './collection.service';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
@@ -28,11 +30,13 @@ export class CollectionController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   createCollection(@Body() createCollectionDto: CreateCollectionDto) {
     return this.collectionService.createCollection(createCollectionDto);
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   updateCollection(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCollectionDto: UpdateCollectionDto,
@@ -41,6 +45,7 @@ export class CollectionController {
   }
 
   @Delete()
+  @UseGuards(JwtAuthGuard)
   deleteCollection(@Param('id', ParseIntPipe) id: number) {
     return this.collectionService.deleteCollection(id);
   }

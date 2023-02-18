@@ -7,9 +7,11 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { CreatePaletteDto } from './dto/create-palette.dto';
 
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreatePaletteDto } from './dto/create-palette.dto';
 import { PaletteService } from './palette.service';
 
 @Controller('palettes')
@@ -27,16 +29,19 @@ export class PaletteController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   createPalette(@Body() createPaletteDto: CreatePaletteDto) {
     return this.paletteService.createPalette(createPaletteDto);
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   updatePalette(@Param('id', ParseIntPipe) id: number) {
     return this.paletteService.updatePalette(id);
   }
 
   @Delete()
+  @UseGuards(JwtAuthGuard)
   deletePalette(@Param('id', ParseIntPipe) id: number) {
     return this.paletteService.deletePalette(id);
   }

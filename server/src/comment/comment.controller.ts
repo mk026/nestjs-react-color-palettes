@@ -7,8 +7,10 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CommentService } from './comment.service';
 import { GetCommentsDto } from './dto/get-comments.dto';
 
@@ -27,16 +29,19 @@ export class CommentController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   createComment() {
     return this.commentService.createComment();
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   updateComment(@Param('id', ParseIntPipe) id: number) {
     return this.commentService.updateComment(id);
   }
 
   @Delete()
+  @UseGuards(JwtAuthGuard)
   deleteComment(@Param('id', ParseIntPipe) id: number) {
     return this.commentService.deleteComment(id);
   }
