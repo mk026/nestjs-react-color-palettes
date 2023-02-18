@@ -10,14 +10,15 @@ import {
 } from '@nestjs/common';
 
 import { CommentService } from './comment.service';
+import { GetCommentsDto } from './dto/get-comments.dto';
 
 @Controller('comments')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Get()
-  getComments(@Query('postId') postId: number) {
-    return this.commentService.getComments(postId);
+  getComments(@Query() getCommentsDto: GetCommentsDto) {
+    return this.commentService.getComments(getCommentsDto);
   }
 
   @Get(':id')

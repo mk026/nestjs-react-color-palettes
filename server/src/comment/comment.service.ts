@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
+import { GetCommentsDto } from './dto/get-comments.dto';
+
 @Injectable()
 export class CommentService {
-  getComments(postId: number) {
-    return `Return all comments for post with id ${postId}`;
+  getComments(getCommentsDto: GetCommentsDto) {
+    return `Return all comments for post with id ${getCommentsDto.postId}`;
   }
 
   getComment(id: number) {
