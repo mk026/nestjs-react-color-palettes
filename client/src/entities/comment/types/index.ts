@@ -3,4 +3,6 @@ export interface IComment {
   content: string;
   palette: number;
   author: number;
+  createdAt: string;
+  updatedAt: string;
 }
