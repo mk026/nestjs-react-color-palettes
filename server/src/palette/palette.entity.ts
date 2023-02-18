@@ -4,10 +4,12 @@ import {
   Entity,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Comment } from '../comment/comment.entity';
 import { Collection } from '../collection/collection.entity';
 import { User } from '../user/user.entity';
 
@@ -24,6 +26,9 @@ export class Palette {
 
   @ManyToOne(() => User, (user) => user.palettes)
   author: User;
+
+  @OneToMany(() => Comment, (comment) => comment.palette)
+  comments: Comment[];
 
   @ManyToMany(() => Collection, (collection) => collection.palettes)
   collections: Collection[];

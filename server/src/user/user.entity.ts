@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Comment } from '../comment/comment.entity';
 import { Collection } from '../collection/collection.entity';
 import { Palette } from '../palette/palette.entity';
 
@@ -32,6 +33,9 @@ export class User {
 
   @OneToMany(() => Palette, (palette) => palette.author)
   palettes: Palette[];
+
+  @OneToMany(() => Comment, (comment) => comment.author)
+  comments: Comment[];
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
