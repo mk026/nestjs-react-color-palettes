@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateCommentDto } from './dto/create-comment.dto';
 import { GetCommentsDto } from './dto/get-comments.dto';
 
 @Injectable()
@@ -12,8 +13,8 @@ export class CommentService {
     return `Return comment with id ${id}`;
   }
 
-  createComment() {
-    return 'Create new comment';
+  createComment(createCommentDto: CreateCommentDto) {
+    return `Create new comment ${createCommentDto.content}`;
   }
 
   updateComment(id: number) {

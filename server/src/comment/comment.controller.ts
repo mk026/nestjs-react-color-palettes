@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -12,6 +13,7 @@ import {
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CommentService } from './comment.service';
+import { CreateCommentDto } from './dto/create-comment.dto';
 import { GetCommentsDto } from './dto/get-comments.dto';
 
 @Controller('comments')
@@ -30,8 +32,8 @@ export class CommentController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  createComment() {
-    return this.commentService.createComment();
+  createComment(@Body() createCommentDto: CreateCommentDto) {
+    return this.commentService.createComment(createCommentDto);
   }
 
   @Put(':id')
