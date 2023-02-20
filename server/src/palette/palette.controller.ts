@@ -12,6 +12,7 @@ import {
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreatePaletteDto } from './dto/create-palette.dto';
+import { UpdatePaletteDto } from './dto/update-palette.dto';
 import { PaletteService } from './palette.service';
 
 @Controller('palettes')
@@ -36,8 +37,11 @@ export class PaletteController {
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
-  updatePalette(@Param('id', ParseIntPipe) id: number) {
-    return this.paletteService.updatePalette(id);
+  updatePalette(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePaletteDto: UpdatePaletteDto,
+  ) {
+    return this.paletteService.updatePalette(id, updatePaletteDto);
   }
 
   @Delete()
