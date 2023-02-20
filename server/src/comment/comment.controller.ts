@@ -11,6 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
+import { AuthUser } from '../common/decorators/auth-user.decorator';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -33,8 +34,11 @@ export class CommentController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  createComment(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.createComment(createCommentDto);
+  createComment(
+    @Body() createCommentDto: CreateCommentDto,
+    @AuthUser() userId: number,
+  ) {
+    return this.commentService.createComment(createCommentDto, userId);
   }
 
   @Put(':id')
@@ -42,13 +46,17 @@ export class CommentController {
   updateComment(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCommentDto: UpdateCommentDto,
+    @AuthUser() userId: number,
   ) {
-    return this.commentService.updateComment(id, updateCommentDto);
+    return this.commentService.updateComment(id, updateCommentDto, userId);
   }
 
   @Delete()
   @UseGuards(JwtAuthGuard)
-  deleteComment(@Param('id', ParseIntPipe) id: number) {
-    return this.commentService.deleteComment(id);
+  deleteComment(
+    @Param('id', ParseIntPipe) id: number,
+    @AuthUser() userId: number,
+  ) {
+    return this.commentService.deleteComment(id, userId);
   }
 }

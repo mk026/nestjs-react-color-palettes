@@ -14,15 +14,19 @@ export class CommentService {
     return `Return comment with id ${id}`;
   }
 
-  createComment(createCommentDto: CreateCommentDto) {
+  createComment(createCommentDto: CreateCommentDto, userId: number) {
     return `Create new comment ${createCommentDto.content}`;
   }
 
-  updateComment(id: number, updateCommentDto: UpdateCommentDto) {
+  updateComment(
+    id: number,
+    updateCommentDto: UpdateCommentDto,
+    userId: number,
+  ) {
     return `Update comment with id ${id} ${updateCommentDto.content}`;
   }
 
-  deleteComment(id: number) {
+  deleteComment(id: number, userId: number) {
     return `Delete comment with id ${id}`;
   }
 }
