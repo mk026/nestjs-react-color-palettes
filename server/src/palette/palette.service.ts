@@ -13,15 +13,19 @@ export class PaletteService {
     return `Return palette with id ${id}`;
   }
 
-  createPalette(createPaletteDto: CreatePaletteDto) {
+  createPalette(createPaletteDto: CreatePaletteDto, userId: number) {
     return 'Create new palette';
   }
 
-  updatePalette(id: number, updatePaletteDto: UpdatePaletteDto) {
+  updatePalette(
+    id: number,
+    updatePaletteDto: UpdatePaletteDto,
+    userId: number,
+  ) {
     return `Update palette with id ${id}`;
   }
 
-  deletePalette(id: number) {
+  deletePalette(id: number, userId: number) {
     return `Delete palette with id ${id}`;
   }
 }
