@@ -7,20 +7,13 @@ import CreatePaletteButton from "../create-palette-button";
 import FormField from "../../../../shared/ui/form-field";
 
 const CreatePaletteForm: FC = () => {
-  const methods = useCreatePaletteForm();
-
-  const createPaletteHandler = (values: any) => {
-    console.log(values);
-  };
+  const { formMethods, onSubmit, isLoading } = useCreatePaletteForm();
 
   return (
-    <FormProvider {...methods}>
-      <Box
-        component="form"
-        onSubmit={methods.handleSubmit(createPaletteHandler)}
-      >
+    <FormProvider {...formMethods}>
+      <Box component="form" onSubmit={onSubmit}>
         <FormField label="Title" name="title" />
-        <CreatePaletteButton isLoading={false} />
+        <CreatePaletteButton isLoading={isLoading} />
       </Box>
     </FormProvider>
   );
