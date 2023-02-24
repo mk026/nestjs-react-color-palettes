@@ -12,7 +12,6 @@ export const createCollectionValidationSchema = yup.object({
     .string()
     .min(COLLECTION_TITLE_MIN_LENGTH)
     .max(COLLECTION_TITLE_MAX_LENGTH)
-    .email()
     .required(),
   description: yup
     .array()

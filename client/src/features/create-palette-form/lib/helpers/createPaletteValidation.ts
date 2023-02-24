@@ -10,7 +10,6 @@ export const createPaletteValidationSchema = yup.object({
     .string()
     .min(PALETTE_TITLE_MIN_LENGTH)
     .max(PALETTE_TITLE_MAX_LENGTH)
-    .email()
     .required(),
   colors: yup.array().required(),
 });
