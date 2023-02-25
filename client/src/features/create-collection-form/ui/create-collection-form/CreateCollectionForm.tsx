@@ -18,6 +18,7 @@ const CreateCollectionForm: FC = () => {
       onSubmit={methods.handleSubmit(createCollectionHandler)}
     >
       <FormField label="Title" name="title" />
+      <FormField label="Description" name="description" multiline />
       <CreateCollectionButton isLoading={false} />
     </Form>
   );

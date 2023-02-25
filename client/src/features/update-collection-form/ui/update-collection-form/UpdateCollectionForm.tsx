@@ -17,6 +17,7 @@ const UpdateCollectionForm: FC = () => {
       onSubmit={methods.handleSubmit(updateCollectionHandler)}
     >
       <FormField label="Title" name="title" />
+      <FormField label="Description" name="description" multiline />
       <UpdateCollectionButton isLoading={false} />
     </Form>
   );
