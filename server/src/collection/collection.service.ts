@@ -1,27 +1,59 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
+import { Collection } from './collection.entity';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 
 @Injectable()
 export class CollectionService {
+  constructor(
+    @InjectRepository(Collection)
+    private readonly collectionRepository: Repository<Collection>,
+  ) {}
+
   getCollections() {
-    return 'Return all collections';
+    return this.collectionRepository.find();
   }
 
   getCollection(id: number) {
-    return `Return collection with id ${id}`;
+    return this.collectionRepository.find({ where: { id } });
   }
 
-  createCollection(createCollectionDto: CreateCollectionDto) {
-    return 'Create new collection';
+  async createCollection(
+    createCollectionDto: CreateCollectionDto,
+    userId: number,
+  ) {
+    const collection = this.collectionRepository.create({
+      title: createCollectionDto.title,
+      description: createCollectionDto.description,
+      author: { id: userId },
+    });
+    await this.collectionRepository.save(collection);
   }
 
-  updateCollection(id: number, updateCollectionDto: UpdateCollectionDto) {
-    return `Update collection with id ${id}`;
+  async updateCollection(
+    id: number,
+    updateCollectionDto: UpdateCollectionDto,
+    userId: number,
+  ) {
+    const result = await this.collectionRepository.update(
+      { id, author: { id: userId } },
+      updateCollectionDto,
+    );
+    if (result.affected === 0) {
+      throw new NotFoundException(`Collection with id ${id} not found`);
+    }
   }
 
-  deleteCollection(id: number) {
-    return `Delete collection with id ${id}`;
+  async deleteCollection(id: number, userId: number) {
+    const result = await this.collectionRepository.delete({
+      id,
+      author: { id: userId },
+    });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Collection with id ${id} not found`);
+    }
   }
 }
