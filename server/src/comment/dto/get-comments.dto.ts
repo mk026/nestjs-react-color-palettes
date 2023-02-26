@@ -7,5 +7,5 @@ export class GetCommentsDto extends PaginationDto {
   @IsOptional()
   @IsInt()
   @Type(() => Number)
-  readonly postId?: number;
+  readonly paletteId?: number;
 }
