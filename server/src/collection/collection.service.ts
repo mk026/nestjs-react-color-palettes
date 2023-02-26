@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 
 import { Collection } from './collection.entity';
 import { CreateCollectionDto } from './dto/create-collection.dto';
+import { GetCollectionsDto } from './dto/get-collections.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 
 @Injectable()
@@ -13,8 +14,11 @@ export class CollectionService {
     private readonly collectionRepository: Repository<Collection>,
   ) {}
 
-  getCollections() {
-    return this.collectionRepository.find();
+  getCollections(getCollectionsDto: GetCollectionsDto) {
+    return this.collectionRepository.find({
+      skip: getCollectionsDto.skip,
+      take: getCollectionsDto.take,
+    });
   }
 
   getCollection(id: number) {

@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -15,14 +16,15 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CollectionService } from './collection.service';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
+import { GetCollectionsDto } from './dto/get-collections.dto';
 
 @Controller('collections')
 export class CollectionController {
   constructor(private readonly collectionService: CollectionService) {}
 
   @Get()
-  getCollections() {
-    return this.collectionService.getCollections();
+  getCollections(@Query() getCollectionsDto: GetCollectionsDto) {
+    return this.collectionService.getCollections(getCollectionsDto);
   }
 
   @Get(':id')
