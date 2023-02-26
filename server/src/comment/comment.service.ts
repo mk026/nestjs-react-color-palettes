@@ -19,6 +19,8 @@ export class CommentService {
       where: {
         palette: { id: getCommentsDto.paletteId },
       },
+      skip: getCommentsDto.skip,
+      take: getCommentsDto.take,
     });
   }
 
