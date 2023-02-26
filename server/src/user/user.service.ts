@@ -18,12 +18,12 @@ export class UserService {
     return 'Create new user';
   }
 
-  updateUser(updateUserDto: UpdateUserDto) {
-    return `Update user`;
+  updateUser(updateUserDto: UpdateUserDto, userId: number) {
+    return `Update user with id ${userId}`;
   }
 
-  updatePassword(updatePasswordDto: UpdatePasswordDto) {
-    return `Update password`;
+  updatePassword(updatePasswordDto: UpdatePasswordDto, userId: number) {
+    return `Update password for user with id ${userId}`;
   }
 
   deleteUser(id: number) {
