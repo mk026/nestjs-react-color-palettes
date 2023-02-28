@@ -6,6 +6,7 @@ import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { GetUsersDto } from './dto/get-users.dto';
 
 @Injectable()
 export class UserService {
@@ -14,8 +15,11 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  getUsers() {
-    return this.userRepository.find();
+  getUsers(getUsersDto: GetUsersDto) {
+    return this.userRepository.find({
+      skip: getUsersDto.skip,
+      take: getUsersDto.take,
+    });
   }
 
   getUser(id: number) {
