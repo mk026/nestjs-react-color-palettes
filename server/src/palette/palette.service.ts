@@ -6,6 +6,7 @@ import { Palette } from './palette.entity';
 import { CreatePaletteDto } from './dto/create-palette.dto';
 import { UpdatePaletteDto } from './dto/update-palette.dto';
 import { GetPalettesDto } from './dto/get-palettes.dto';
+import { SearchPalettesDto } from './dto/search-palettes.dto';
 
 @Injectable()
 export class PaletteService {
@@ -21,8 +22,12 @@ export class PaletteService {
     });
   }
 
-  searchPalettes() {
-    return this.paletteRepository.find();
+  searchPalettes(searchPalettesDto: SearchPalettesDto) {
+    return this.paletteRepository.find({
+      where: { title: searchPalettesDto.title },
+      skip: searchPalettesDto.skip,
+      take: searchPalettesDto.take,
+    });
   }
 
   getPalette(id: number) {

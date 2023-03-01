@@ -17,6 +17,7 @@ import { CreatePaletteDto } from './dto/create-palette.dto';
 import { UpdatePaletteDto } from './dto/update-palette.dto';
 import { PaletteService } from './palette.service';
 import { GetPalettesDto } from './dto/get-palettes.dto';
+import { SearchPalettesDto } from './dto/search-palettes.dto';
 
 @Controller('palettes')
 export class PaletteController {
@@ -28,8 +29,8 @@ export class PaletteController {
   }
 
   @Get('search')
-  searchPalettes() {
-    return this.paletteService.searchPalettes();
+  searchPalettes(@Query() searchPalettesDto: SearchPalettesDto) {
+    return this.paletteService.searchPalettes(searchPalettesDto);
   }
 
   @Get(':id')
