@@ -27,6 +27,11 @@ export class PaletteController {
     return this.paletteService.getPalettes(getPalettesDto);
   }
 
+  @Get('search')
+  searchPalettes() {
+    return this.paletteService.searchPalettes();
+  }
+
   @Get(':id')
   getPalette(@Param('id', ParseIntPipe) id: number) {
     return this.paletteService.getPalette(id);

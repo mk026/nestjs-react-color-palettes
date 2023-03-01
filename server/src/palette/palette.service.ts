@@ -21,6 +21,10 @@ export class PaletteService {
     });
   }
 
+  searchPalettes() {
+    return this.paletteRepository.find();
+  }
+
   getPalette(id: number) {
     return this.paletteRepository.findOne({ where: { id } });
   }
