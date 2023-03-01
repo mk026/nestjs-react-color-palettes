@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -15,14 +16,15 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreatePaletteDto } from './dto/create-palette.dto';
 import { UpdatePaletteDto } from './dto/update-palette.dto';
 import { PaletteService } from './palette.service';
+import { GetPalettesDto } from './dto/get-palettes.dto';
 
 @Controller('palettes')
 export class PaletteController {
   constructor(private readonly paletteService: PaletteService) {}
 
   @Get()
-  getPalettes() {
-    return this.paletteService.getPalettes();
+  getPalettes(@Query() getPalettesDto: GetPalettesDto) {
+    return this.paletteService.getPalettes(getPalettesDto);
   }
 
   @Get(':id')

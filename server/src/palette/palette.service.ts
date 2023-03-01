@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Palette } from './palette.entity';
 import { CreatePaletteDto } from './dto/create-palette.dto';
 import { UpdatePaletteDto } from './dto/update-palette.dto';
+import { GetPalettesDto } from './dto/get-palettes.dto';
 
 @Injectable()
 export class PaletteService {
@@ -13,8 +14,11 @@ export class PaletteService {
     private readonly paletteRepository: Repository<Palette>,
   ) {}
 
-  getPalettes() {
-    return this.paletteRepository.find();
+  getPalettes(getPalettesDto: GetPalettesDto) {
+    return this.paletteRepository.find({
+      skip: getPalettesDto.skip,
+      take: getPalettesDto.take,
+    });
   }
 
   getPalette(id: number) {
