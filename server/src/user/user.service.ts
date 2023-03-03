@@ -26,13 +26,13 @@ export class UserService {
     return this.userRepository.findOne({ where: { id } });
   }
 
-  async createUser(createUserDto: CreateUserDto) {
+  createUser(createUserDto: CreateUserDto) {
     const user = this.userRepository.create({
       name: createUserDto.name,
       bio: createUserDto.bio,
       email: createUserDto.email,
     });
-    await this.userRepository.save(user);
+    return this.userRepository.save(user);
   }
 
   async updateUser(updateUserDto: UpdateUserDto, userId: number) {
