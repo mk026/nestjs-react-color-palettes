@@ -4,13 +4,22 @@ import { JwtService } from '@nestjs/jwt';
 import { SigninCredentialsDto } from './dto/signin-credentials.dto';
 import { SignupCredentialsDto } from './dto/signup-credentials.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly userService: UserService,
+  ) {}
 
-  signup(signupCredentialsDto: SignupCredentialsDto) {
-    return 'Signup';
+  async signup(signupCredentialsDto: SignupCredentialsDto) {
+    const user = await this.userService.createUser(signupCredentialsDto);
+    const accessToken = this.signToken(user.id);
+    return {
+      user: { name: user.name, email: user.email },
+      accessToken,
+    };
   }
 
   signin(signinCredentialsDto: SigninCredentialsDto) {
