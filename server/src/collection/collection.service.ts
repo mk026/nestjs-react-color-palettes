@@ -23,7 +23,11 @@ export class CollectionService {
   }
 
   searchCollections(searchCollectionsDto: SearchCollectionsDto) {
-    return 'Search collections';
+    return this.collectionRepository.find({
+      where: { title: searchCollectionsDto.title },
+      skip: searchCollectionsDto.skip,
+      take: searchCollectionsDto.take,
+    });
   }
 
   getCollection(id: number) {
