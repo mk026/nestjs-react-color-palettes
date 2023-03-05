@@ -17,6 +17,7 @@ import { CollectionService } from './collection.service';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { GetCollectionsDto } from './dto/get-collections.dto';
+import { SearchCollectionsDto } from './dto/search-collections.dto';
 
 @Controller('collections')
 export class CollectionController {
@@ -25,6 +26,11 @@ export class CollectionController {
   @Get()
   getCollections(@Query() getCollectionsDto: GetCollectionsDto) {
     return this.collectionService.getCollections(getCollectionsDto);
+  }
+
+  @Get('search')
+  searchCollections(@Query() searchCollectionsDto: SearchCollectionsDto) {
+    return this.collectionService.searchCollections(searchCollectionsDto);
   }
 
   @Get(':id')

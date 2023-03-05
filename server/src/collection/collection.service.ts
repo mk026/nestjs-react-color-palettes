@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Collection } from './collection.entity';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { GetCollectionsDto } from './dto/get-collections.dto';
+import { SearchCollectionsDto } from './dto/search-collections.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 
 @Injectable()
@@ -19,6 +20,10 @@ export class CollectionService {
       skip: getCollectionsDto.skip,
       take: getCollectionsDto.take,
     });
+  }
+
+  searchCollections(searchCollectionsDto: SearchCollectionsDto) {
+    return 'Search collections';
   }
 
   getCollection(id: number) {
