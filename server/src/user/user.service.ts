@@ -24,7 +24,11 @@ export class UserService {
   }
 
   searchUsers(searchUsersDto: SearchUsersDto) {
-    return 'Search users';
+    return this.userRepository.find({
+      where: { name: searchUsersDto.name },
+      skip: searchUsersDto.skip,
+      take: searchUsersDto.take,
+    });
   }
 
   getUser(id: number) {
