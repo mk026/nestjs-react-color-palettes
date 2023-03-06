@@ -16,6 +16,7 @@ import { UserService } from './user.service';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GetUsersDto } from './dto/get-users.dto';
+import { SearchUsersDto } from './dto/search-users.dto';
 
 @Controller('users')
 export class UserController {
@@ -24,6 +25,11 @@ export class UserController {
   @Get()
   getUsers(@Query() getUsersDto: GetUsersDto) {
     return this.userService.getUsers(getUsersDto);
+  }
+
+  @Get('search')
+  searchUsers(@Query() searchUsersDto: SearchUsersDto) {
+    return this.userService.searchUsers(searchUsersDto);
   }
 
   @Get(':id')

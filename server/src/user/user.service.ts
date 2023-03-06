@@ -7,6 +7,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GetUsersDto } from './dto/get-users.dto';
+import { SearchUsersDto } from './dto/search-users.dto';
 
 @Injectable()
 export class UserService {
@@ -20,6 +21,10 @@ export class UserService {
       skip: getUsersDto.skip,
       take: getUsersDto.take,
     });
+  }
+
+  searchUsers(searchUsersDto: SearchUsersDto) {
+    return 'Search users';
   }
 
   getUser(id: number) {
