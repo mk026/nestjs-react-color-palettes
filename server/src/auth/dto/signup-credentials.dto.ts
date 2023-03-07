@@ -17,6 +17,7 @@ export class SignupCredentialsDto {
   @MaxLength(10000)
   readonly bio?: string;
 
+  @IsNotEmpty()
   @IsEmail()
   readonly email: string;
 
