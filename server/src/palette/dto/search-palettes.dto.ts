@@ -5,7 +5,7 @@ import { PaginationDto } from '../../common/dto/pagination.dto';
 
 export class SearchPalettesDto extends PaginationDto {
   @IsOptional()
-  readonly title: string;
+  readonly title?: string;
 
   @IsOptional()
   @IsInt()
