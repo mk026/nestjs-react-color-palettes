@@ -21,6 +21,9 @@ export class Palette {
   @Column()
   title: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @Column({ array: true })
   colors: string[];
 
