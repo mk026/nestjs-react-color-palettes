@@ -61,7 +61,7 @@ export class CollectionController {
     );
   }
 
-  @Delete()
+  @Delete(':id')
   @UseGuards(JwtAuthGuard)
   deleteCollection(
     @Param('id', ParseIntPipe) id: number,

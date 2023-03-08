@@ -57,7 +57,7 @@ export class PaletteController {
     return this.paletteService.updatePalette(id, updatePaletteDto, userId);
   }
 
-  @Delete()
+  @Delete(':id')
   @UseGuards(JwtAuthGuard)
   deletePalette(
     @Param('id', ParseIntPipe) id: number,
