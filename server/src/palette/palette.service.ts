@@ -24,7 +24,10 @@ export class PaletteService {
 
   searchPalettes(searchPalettesDto: SearchPalettesDto) {
     return this.paletteRepository.find({
-      where: { title: searchPalettesDto.title },
+      where: {
+        title: searchPalettesDto.title,
+        author: { id: searchPalettesDto.authorId },
+      },
       skip: searchPalettesDto.skip,
       take: searchPalettesDto.take,
     });

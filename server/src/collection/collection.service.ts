@@ -24,7 +24,10 @@ export class CollectionService {
 
   searchCollections(searchCollectionsDto: SearchCollectionsDto) {
     return this.collectionRepository.find({
-      where: { title: searchCollectionsDto.title },
+      where: {
+        title: searchCollectionsDto.title,
+        author: { id: searchCollectionsDto.authorId },
+      },
       skip: searchCollectionsDto.skip,
       take: searchCollectionsDto.take,
     });
