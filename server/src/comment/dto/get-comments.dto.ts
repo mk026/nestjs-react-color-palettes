@@ -1,10 +1,10 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsOptional } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 import { PaginationDto } from '../../common/dto/pagination.dto';
 
 export class GetCommentsDto extends PaginationDto {
-  @IsOptional()
+  @IsNotEmpty()
   @IsInt()
   @Type(() => Number)
   readonly paletteId?: number;
