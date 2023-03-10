@@ -11,4 +11,9 @@ export class SearchPalettesDto extends PaginationDto {
   @IsInt()
   @Type(() => Number)
   readonly authorId?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  readonly collectionId?: number;
 }
