@@ -8,6 +8,7 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GetUsersDto } from './dto/get-users.dto';
 import { SearchUsersDto } from './dto/search-users.dto';
+import { Hash } from '../common/utils/hash.util';
 
 @Injectable()
 export class UserService {
@@ -36,10 +37,12 @@ export class UserService {
   }
 
   createUser(createUserDto: CreateUserDto) {
+    const passwordHash = Hash.generateHash(createUserDto.password);
     const user = this.userRepository.create({
       name: createUserDto.name,
       bio: createUserDto.bio,
       email: createUserDto.email,
+      password: passwordHash,
     });
     return this.userRepository.save(user);
   }
