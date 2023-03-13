@@ -28,7 +28,7 @@ export class CollectionController {
     return this.collectionService.getCollections(getCollectionsDto);
   }
 
-  @Get()
+  @Get('favorites')
   @UseGuards(JwtAuthGuard)
   getFavoriteCollections(
     @Query() getCollectionsDto: GetCollectionsDto,

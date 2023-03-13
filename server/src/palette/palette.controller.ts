@@ -28,7 +28,7 @@ export class PaletteController {
     return this.paletteService.getPalettes(getPalettesDto);
   }
 
-  @Get()
+  @Get('favorites')
   @UseGuards(JwtAuthGuard)
   getFavoritePalettes(
     @Query() getPalettesDto: GetPalettesDto,
