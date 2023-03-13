@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { SigninCredentialsDto } from './dto/signin-credentials.dto';
 import { SignupCredentialsDto } from './dto/signup-credentials.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { UserService } from '../user/user.service';
+import { Hash } from '../common/utils/hash.util';
 
 @Injectable()
 export class AuthService {
@@ -22,8 +23,21 @@ export class AuthService {
     };
   }
 
-  signin(signinCredentialsDto: SigninCredentialsDto) {
-    return 'Signin';
+  async signin(signinCredentialsDto: SigninCredentialsDto) {
+    const { email, password } = signinCredentialsDto;
+    const foundUser = await this.userService.getUserByEmail(email);
+    if (!foundUser) {
+      throw new UnauthorizedException('Incorrect email or password');
+    }
+    const isPasswordValid = Hash.compare(password, foundUser.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Incorrect email or password');
+    }
+    const accessToken = this.signToken(foundUser.id);
+    return {
+      user: { name: foundUser.name, email: foundUser.email },
+      accessToken,
+    };
   }
 
   signToken(userId: number) {
