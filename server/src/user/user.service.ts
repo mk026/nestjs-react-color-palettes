@@ -40,10 +40,12 @@ export class UserService {
     return this.userRepository.findOne({ where: { id } });
   }
 
+  getUserByEmail(email: string) {
+    return this.userRepository.findOneBy({ email });
+  }
+
   async createUser(createUserDto: CreateUserDto) {
-    const foundUser = await this.userRepository.findOneBy({
-      email: createUserDto.email,
-    });
+    const foundUser = await this.getUserByEmail(createUserDto.email);
     if (foundUser) {
       throw new ConflictException('Email already in use');
     }
