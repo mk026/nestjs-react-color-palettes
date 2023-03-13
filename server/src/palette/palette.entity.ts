@@ -36,6 +36,9 @@ export class Palette {
   @ManyToMany(() => Collection, (collection) => collection.palettes)
   collections: Collection[];
 
+  @ManyToMany(() => User, (user) => user.favoritePalettes)
+  inFavorites: User[];
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

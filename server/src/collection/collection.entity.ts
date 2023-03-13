@@ -30,6 +30,9 @@ export class Collection {
   @JoinTable()
   palettes: Palette[];
 
+  @ManyToMany(() => User, (user) => user.favoriteCollections)
+  inFavorites: User[];
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -36,6 +37,12 @@ export class User {
 
   @OneToMany(() => Comment, (comment) => comment.author)
   comments: Comment[];
+
+  @ManyToMany(() => Collection, (collection) => collection.inFavorites)
+  favoriteCollections: Collection[];
+
+  @ManyToMany(() => Palette, (palette) => palette.inFavorites)
+  favoritePalettes: Palette[];
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
