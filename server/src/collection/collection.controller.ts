@@ -28,6 +28,18 @@ export class CollectionController {
     return this.collectionService.getCollections(getCollectionsDto);
   }
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  getFavoriteCollections(
+    @Query() getCollectionsDto: GetCollectionsDto,
+    @AuthUser() userId: number,
+  ) {
+    return this.collectionService.getFavoriteCollections(
+      getCollectionsDto,
+      userId,
+    );
+  }
+
   @Get('search')
   searchCollections(@Query() searchCollectionsDto: SearchCollectionsDto) {
     return this.collectionService.searchCollections(searchCollectionsDto);

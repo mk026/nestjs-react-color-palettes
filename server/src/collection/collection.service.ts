@@ -22,6 +22,16 @@ export class CollectionService {
     });
   }
 
+  getFavoriteCollections(getCollectionsDto: GetCollectionsDto, userId: number) {
+    return this.collectionRepository.find({
+      where: {
+        inFavorites: { id: userId },
+      },
+      skip: getCollectionsDto.skip,
+      take: getCollectionsDto.take,
+    });
+  }
+
   searchCollections(searchCollectionsDto: SearchCollectionsDto) {
     return this.collectionRepository.find({
       where: {
