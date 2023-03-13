@@ -22,6 +22,16 @@ export class PaletteService {
     });
   }
 
+  getFavoritePalettes(getPalettesDto: GetPalettesDto, userId: number) {
+    return this.paletteRepository.find({
+      where: {
+        inFavorites: { id: userId },
+      },
+      skip: getPalettesDto.skip,
+      take: getPalettesDto.take,
+    });
+  }
+
   searchPalettes(searchPalettesDto: SearchPalettesDto) {
     return this.paletteRepository.find({
       where: {

@@ -28,6 +28,15 @@ export class PaletteController {
     return this.paletteService.getPalettes(getPalettesDto);
   }
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  getFavoritePalettes(
+    @Query() getPalettesDto: GetPalettesDto,
+    @AuthUser() userId: number,
+  ) {
+    return this.paletteService.getFavoritePalettes(getPalettesDto, userId);
+  }
+
   @Get('search')
   searchPalettes(@Query() searchPalettesDto: SearchPalettesDto) {
     return this.paletteService.searchPalettes(searchPalettesDto);
