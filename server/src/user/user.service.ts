@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -67,7 +68,18 @@ export class UserService {
   }
 
   async updatePassword(updatePasswordDto: UpdatePasswordDto, userId: number) {
-    return `Update password for user with id ${userId}`;
+    const user = await this.userRepository.findOneBy({ id: userId });
+    if (!user) {
+      throw new NotFoundException(`User with id ${userId} not found`);
+    }
+    const { oldPassword, newPassword } = updatePasswordDto;
+    const isPasswordValid = Hash.compare(oldPassword, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    const newPasswordHash = Hash.generateHash(newPassword);
+    user.password = newPasswordHash;
+    await this.userRepository.save(user);
   }
 
   async deleteUser(id: number) {
