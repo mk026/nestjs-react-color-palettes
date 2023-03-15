@@ -18,6 +18,7 @@ import { UpdatePaletteDto } from './dto/update-palette.dto';
 import { PaletteService } from './palette.service';
 import { GetPalettesDto } from './dto/get-palettes.dto';
 import { SearchPalettesDto } from './dto/search-palettes.dto';
+import { AddToFavoritesDto } from '../common/dto/add-to-favorites.dto';
 
 @Controller('palettes')
 export class PaletteController {
@@ -35,6 +36,15 @@ export class PaletteController {
     @AuthUser() userId: number,
   ) {
     return this.paletteService.getFavoritePalettes(getPalettesDto, userId);
+  }
+
+  @Post('favorites')
+  @UseGuards(JwtAuthGuard)
+  addPaletteToFavorites(
+    @Body() addToFavoritesDto: AddToFavoritesDto,
+    @AuthUser() userId: number,
+  ) {
+    return this.paletteService.addPaletteToFavorites(addToFavoritesDto, userId);
   }
 
   @Get('search')

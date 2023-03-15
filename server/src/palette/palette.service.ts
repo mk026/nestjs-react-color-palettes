@@ -7,6 +7,7 @@ import { CreatePaletteDto } from './dto/create-palette.dto';
 import { UpdatePaletteDto } from './dto/update-palette.dto';
 import { GetPalettesDto } from './dto/get-palettes.dto';
 import { SearchPalettesDto } from './dto/search-palettes.dto';
+import { AddToFavoritesDto } from '../common/dto/add-to-favorites.dto';
 
 @Injectable()
 export class PaletteService {
@@ -30,6 +31,13 @@ export class PaletteService {
       skip: getPalettesDto.skip,
       take: getPalettesDto.take,
     });
+  }
+
+  async addPaletteToFavorites(
+    addToFavoritesDto: AddToFavoritesDto,
+    userId: number,
+  ) {
+    return `Add palette ${addToFavoritesDto.id} to favorites of user ${userId}`;
   }
 
   searchPalettes(searchPalettesDto: SearchPalettesDto) {
