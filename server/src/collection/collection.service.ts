@@ -59,6 +59,10 @@ export class CollectionService {
     await this.collectionRepository.save(collection);
   }
 
+  async addCollectionToFavorites(id: number, userId: number) {
+    return `Add collection ${id} to favorites of user ${userId}`;
+  }
+
   async updateCollection(
     id: number,
     updateCollectionDto: UpdateCollectionDto,

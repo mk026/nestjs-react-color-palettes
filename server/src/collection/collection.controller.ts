@@ -59,6 +59,15 @@ export class CollectionController {
     return this.collectionService.createCollection(createCollectionDto, userId);
   }
 
+  @Post(':id')
+  @UseGuards(JwtAuthGuard)
+  addCollectionToFavorites(
+    @Param('id', ParseIntPipe) id: number,
+    @AuthUser() userId: number,
+  ) {
+    return this.collectionService.addCollectionToFavorites(id, userId);
+  }
+
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   updateCollection(
