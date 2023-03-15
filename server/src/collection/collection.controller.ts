@@ -18,6 +18,7 @@ import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { GetCollectionsDto } from './dto/get-collections.dto';
 import { SearchCollectionsDto } from './dto/search-collections.dto';
+import { AddToFavoritesDto } from '../common/dto/add-to-favorites.dto';
 
 @Controller('collections')
 export class CollectionController {
@@ -40,6 +41,18 @@ export class CollectionController {
     );
   }
 
+  @Post('favorites')
+  @UseGuards(JwtAuthGuard)
+  addCollectionToFavorites(
+    @Body() addToFavoritesDto: AddToFavoritesDto,
+    @AuthUser() userId: number,
+  ) {
+    return this.collectionService.addCollectionToFavorites(
+      addToFavoritesDto,
+      userId,
+    );
+  }
+
   @Get('search')
   searchCollections(@Query() searchCollectionsDto: SearchCollectionsDto) {
     return this.collectionService.searchCollections(searchCollectionsDto);
@@ -57,15 +70,6 @@ export class CollectionController {
     @AuthUser() userId: number,
   ) {
     return this.collectionService.createCollection(createCollectionDto, userId);
-  }
-
-  @Post(':id')
-  @UseGuards(JwtAuthGuard)
-  addCollectionToFavorites(
-    @Param('id', ParseIntPipe) id: number,
-    @AuthUser() userId: number,
-  ) {
-    return this.collectionService.addCollectionToFavorites(id, userId);
   }
 
   @Put(':id')

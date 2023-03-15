@@ -7,6 +7,7 @@ import { CreateCollectionDto } from './dto/create-collection.dto';
 import { GetCollectionsDto } from './dto/get-collections.dto';
 import { SearchCollectionsDto } from './dto/search-collections.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
+import { AddToFavoritesDto } from '../common/dto/add-to-favorites.dto';
 
 @Injectable()
 export class CollectionService {
@@ -59,8 +60,11 @@ export class CollectionService {
     await this.collectionRepository.save(collection);
   }
 
-  async addCollectionToFavorites(id: number, userId: number) {
-    return `Add collection ${id} to favorites of user ${userId}`;
+  async addCollectionToFavorites(
+    addToFavoritesDto: AddToFavoritesDto,
+    userId: number,
+  ) {
+    return `Add collection ${addToFavoritesDto.id} to favorites of user ${userId}`;
   }
 
   async updateCollection(
